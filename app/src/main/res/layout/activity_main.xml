@@ -124,9 +124,52 @@
             android:text="@string/emptyText"/>
 
         <TextView
-            android:id="@+id/temp_label"
+            android:id="@+id/rmssd_label"
             android:layout_marginTop="10dp"
             android:layout_below="@id/ibi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rmssd_label" />
+
+        <TextView
+            android:layout_below="@id/rmssd_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rmssd"
+            android:text="@string/emptyText"/>
+        <TextView
+            android:id="@+id/sdnn_label"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/rmssd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sdnn_label" />
+
+        <TextView
+            android:layout_below="@id/sdnn_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sdnn"
+            android:text="@string/emptyText"/>
+        <TextView
+            android:id="@+id/HR_label"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/sdnn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/HR_label" />
+
+        <TextView
+            android:layout_below="@id/HR_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/HR"
+            android:text="@string/emptyText"/>
+
+        <TextView
+            android:id="@+id/temp_label"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/HR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/temp_label" />

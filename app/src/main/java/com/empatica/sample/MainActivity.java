@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
     private TextView ibiLabel;
 
+    private TextView rmssdLabel;
+
+    private TextView sdnnLabel;
+
+    private TextView HRLabel;
+
     private TextView temperatureLabel;
 
     private TextView batteryLabel;
@@ -72,13 +78,17 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
 
     ///// added for calculations
-    //private float HR = 0;
+
     //private int ibiCount = 0;
     ArrayList<ArrayList> ibiList = new ArrayList();
     //ArrayList<Float> ibiList = new ArrayList();
 
     private double rmssd = 0;
-    private int y = 0;
+    private double sdnn = 0;
+    private float HR = 0;
+    private double ibiAvg = 0;
+    private int rmssd_y = 0;
+    private int sdnn_y = 0;
     private boolean isCalm = false;
     private double timeStart = 0;
 
@@ -105,6 +115,12 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         edaLabel = (TextView) findViewById(R.id.eda);
 
         ibiLabel = (TextView) findViewById(R.id.ibi);
+
+        rmssdLabel = (TextView) findViewById(R.id.rmssd);
+
+        sdnnLabel = (TextView) findViewById(R.id.sdnn);
+
+        HRLabel = (TextView) findViewById(R.id.HR);
 
         temperatureLabel = (TextView) findViewById(R.id.temperature);
 
@@ -279,9 +295,6 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
 
 
-
-
-
             // The device manager disconnected from a device
         } else if (status == EmpaStatus.DISCONNECTED) {
 
@@ -322,28 +335,30 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         ArrayList timeibiList = new ArrayList();
         timeibiList.add(timestamp);
         timeibiList.add(ibi);
-        ibiList.add(timeibiList);
+        ibiList.add(timeibiList);  // ((timestamp1, ibi1),(timestamp2, ibi2),...)
 
         //System.out.println("ibiList=" + ibiList + " ibisize=" + ibiList.size());
 
 
+        ////////// To calculate RMSSD
         //// 60 IBI data points, irregardless of time
-        /*
+
         if (ibiList.size() > 61){
             //System.out.println((Float)ibiList.get(0).get(1) - (Float)ibiList.get(1).get(1));
             double x = 0;
 
-            for (int i = y; i < ibiList.size()-1; i++) {
+            for (int i = rmssd_y; i < ibiList.size()-1; i++) {
                 x += Math.pow(((Float)ibiList.get(i).get(1) - (Float)ibiList.get(i+1).get(1)), 2);
             }
-            y++;
+            rmssd_y++;
             //System.out.println(x);
-            rmssd = Math.sqrt(x/(ibiList.size()-1-y));
-            System.out.println("RMSSD=" + rmssd*1000);
+            rmssd = Math.sqrt(x/(ibiList.size()-1-rmssd_y));
+            System.out.println("RMSSD= " + rmssd*1000);
         }
-        */
 
 
+
+        /*
         //// 30 seconds, irregardless of number of IBI data points
         if (ibiList.size() > 61){
             //System.out.println((Float)ibiList.get(0).get(1) - (Float)ibiList.get(1).get(1));
@@ -362,13 +377,14 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 }
             }
             //System.out.println(x);
-            System.out.println(y);
+            //System.out.println(y);
             rmssd = Math.sqrt(x/(y));
-            System.out.println("RMSSD=" + rmssd*1000);
-
+            System.out.println("RMSSD= " + rmssd*1000);
         }
+        */
 
 
+        updateLabel(rmssdLabel, "" + rmssd*1000);
 
         if (rmssd > 70){
             isCalm = true;
@@ -377,9 +393,30 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
             isCalm = false;
         }
         //System.out.println("isCalm=" + isCalm);
+        ////////////////////////////
 
+        ////////// Calculate SDNN
 
+        if (ibiList.size() > 61){
+            //System.out.println((Float)ibiList.get(0).get(1) - (Float)ibiList.get(1).get(1));
+            double z = 0;
+            double ibiSum = 0;
 
+            for (int i = sdnn_y; i < ibiList.size()-1; i++) {
+                ibiSum += (Float)ibiList.get(i).get(1);
+            }
+            ibiAvg = ibiSum/(ibiList.size()-1-sdnn_y);
+
+            for (int i = sdnn_y; i < ibiList.size()-1; i++) {
+                z += Math.pow(((Float)ibiList.get(i).get(1) - ibiAvg), 2);
+            }
+            sdnn_y++;
+            //System.out.println(x);
+            sdnn = Math.sqrt(z/(ibiList.size()-1-sdnn_y));
+            System.out.println("SDNN=" + sdnn*1000);
+        }
+
+        updateLabel(sdnnLabel, "" + sdnn*1000);
 
 
         ////
@@ -387,8 +424,9 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         //System.out.print("timestamp=" + timestamp + ", "); // seconds
         //ibiCount = ibiCount + 1;
         //System.out.print("ibiCount=" +ibiCount);
-        //HR = 60/ibi;
-        //System.out.println("HR=" + HR);
+        HR = 60/ibi;
+        System.out.println("HR=" + HR);
+        updateLabel(HRLabel, "" + HR);
 
     }
 
