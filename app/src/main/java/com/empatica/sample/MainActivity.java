@@ -87,10 +87,15 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     private double sdnn = 0;
     private float HR = 0;
     private double ibiAvg = 0;
-    private int rmssd_y = 0;
     private int sdnn_y = 0;
+    private int rmssd_y = 0;
     private boolean isCalm = false;
     private double timeStart = 0;
+
+    private double ibiTime = 0;
+    private double edaTime = 0;
+
+    ///////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +147,27 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 }
             }
         });
+
+        final Button beginButton = findViewById(R.id.beginButton);
+
+        beginButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                    System.out.println("BEGIN: EDA Timestamp=" + edaTime + " IBI Timestamp=" + ibiTime);
+            }
+        });
+
+        final Button endButton = findViewById(R.id.endButton);
+
+        endButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                    System.out.println("END: EDA Timestamp=" + edaTime + " IBI Timestamp=" + ibiTime);
+            }
+        });
+
 
         initEmpaticaDeviceManager();
     }
@@ -324,6 +350,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     @Override
     public void didReceiveGSR(float gsr, double timestamp) {
         updateLabel(edaLabel, "" + gsr);
+        edaTime = timestamp;
     }
 
 
@@ -331,6 +358,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     @Override
     public void didReceiveIBI(float ibi, double timestamp) {
         updateLabel(ibiLabel, "" + ibi);
+
+        ibiTime = timestamp;
 
         ArrayList timeibiList = new ArrayList();
         timeibiList.add(timestamp);
