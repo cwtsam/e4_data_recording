@@ -7,6 +7,9 @@
     <string name="bvp_label">BVP</string>
     <string name="eda_label">EDA</string>
     <string name="ibi_label">IBI</string>
+    <string name="rmssd_label">RMSSD</string>
+    <string name="sdnn_label">SDNN</string>
+    <string name="HR_label">HR</string>
     <string name="emptyText">-</string>
     <string name="temp_label">Temperature</string>
     <string name="battery_label">Battery</string>
