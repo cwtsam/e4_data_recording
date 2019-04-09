@@ -33,6 +33,8 @@ import com.empatica.empalink.config.EmpaStatus;
 import com.empatica.empalink.delegate.EmpaDataDelegate;
 import com.empatica.empalink.delegate.EmpaStatusDelegate;
 
+import org.ahlab.FileWriter;
+
 import java.util.ArrayList;
 
 
@@ -238,6 +240,11 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
             // Initialize the Device Manager using your API key. You need to have Internet access at this point.
             deviceManager.authenticateWithAPIKey(EMPATICA_API_KEY);
+
+
+            // starts the file writing, creates new folder
+            FileWriter  fileWriter = FileWriter.getInstance();
+            fileWriter.initSession("sdfds","3",2,2); /// change folder and info. text stuff here
         }
     }
 
@@ -351,6 +358,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     public void didReceiveGSR(float gsr, double timestamp) {
         updateLabel(edaLabel, "" + gsr);
         edaTime = timestamp;
+        FileWriter.getInstance().appendAcceleration(timestamp+","+gsr);
+        System.out.println("EDA=" + gsr);
     }
 
 
@@ -358,6 +367,10 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     @Override
     public void didReceiveIBI(float ibi, double timestamp) {
         updateLabel(ibiLabel, "" + ibi);
+
+        FileWriter.getInstance().appendIBI(timestamp+","+ibi); /// append by separating with commas
+
+
 
         ibiTime = timestamp;
 
