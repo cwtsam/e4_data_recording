@@ -156,7 +156,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
             @Override
             public void onClick(View v) {
-                    System.out.println("BEGIN: EDA Timestamp=" + edaTime + " IBI Timestamp=" + ibiTime);
+                FileWriter.getInstance().appendTime(edaTime+","+ibiTime+","+"begin");
+                System.out.println("BEGIN: EDA Timestamp=" + edaTime + " IBI Timestamp=" + ibiTime);
             }
         });
 
@@ -166,7 +167,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
             @Override
             public void onClick(View v) {
-                    System.out.println("END: EDA Timestamp=" + edaTime + " IBI Timestamp=" + ibiTime);
+                FileWriter.getInstance().appendTime(edaTime+","+ibiTime+","+"end");
+                System.out.println("END: EDA Timestamp=" + edaTime + " IBI Timestamp=" + ibiTime);
             }
         });
 
@@ -244,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
             // starts the file writing, creates new folder
             FileWriter  fileWriter = FileWriter.getInstance();
-            fileWriter.initSession("sdfds","3",2,2); /// change folder and info. text stuff here
+            fileWriter.initSession("samantha_pilot","24",2,1); /// change folder and info. text stuff here
         }
     }
 
@@ -358,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     public void didReceiveGSR(float gsr, double timestamp) {
         updateLabel(edaLabel, "" + gsr);
         edaTime = timestamp;
-        FileWriter.getInstance().appendAcceleration(timestamp+","+gsr);
+        FileWriter.getInstance().appendEDA(timestamp+","+gsr);
         System.out.println("EDA=" + gsr);
     }
 
@@ -368,9 +370,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     public void didReceiveIBI(float ibi, double timestamp) {
         updateLabel(ibiLabel, "" + ibi);
 
-        FileWriter.getInstance().appendIBI(timestamp+","+ibi); /// append by separating with commas
-
-
+        FileWriter.getInstance().appendIBI(timestamp+","+ibi+","+HR+","+rmssd*1000+","+sdnn*1000); /// append by separating with commas
 
         ibiTime = timestamp;
 

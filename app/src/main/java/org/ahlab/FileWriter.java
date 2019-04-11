@@ -12,8 +12,9 @@ import java.util.List;
 public class FileWriter {
 	private static final String TAG = "[FileWriter]";
 	private static FileWriter instance;
-	private List<String> acceleration;
+	private List<String> eda;
 	private List<String> ibi;
+	private List<String> timestamp;
 	private String name;
 	private int gender;
 	private int session;
@@ -23,8 +24,9 @@ public class FileWriter {
 	private boolean ready;
 
 	private FileWriter() {
-		acceleration = new ArrayList<>();
+		eda = new ArrayList<>();
 		ibi = new ArrayList<>();
+		timestamp = new ArrayList<>();
 	}
 
 	public static synchronized FileWriter getInstance() {
@@ -90,22 +92,22 @@ public class FileWriter {
 		}
 	}
 
-	public synchronized void appendAcceleration(String record) {
-
-		acceleration.add(record);
-		if (acceleration.size() > 100) {
-			String path = basePath + "/accelerometer.csv";
-			writeFile(acceleration, path);
-			acceleration = new ArrayList<>();
-		}
-	}
-
 	private void writeFile(List<String> accel, String path) {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (String record : accel) {
 			stringBuilder.append(record).append("\n");
 		}
 		write(path, stringBuilder);
+	}
+
+	public synchronized void appendEDA(String record) {
+
+		eda.add(record);
+		if (eda.size() > 10) {
+			String path = basePath + "/eda.csv";
+			writeFile(eda, path);
+			eda = new ArrayList<>();
+		}
 	}
 
 	public synchronized void appendIBI(String record) {
@@ -115,6 +117,16 @@ public class FileWriter {
 			String path = basePath + "/ibi.csv";
 			writeFile(ibi, path);
 			ibi = new ArrayList<>();
+		}
+	}
+
+	public synchronized void appendTime(String record) {
+
+		timestamp.add(record);
+		if (timestamp.size() > 10) {
+			String path = basePath + "/timestamp.csv";
+			writeFile(timestamp, path);
+			timestamp = new ArrayList<>();
 		}
 	}
 }
