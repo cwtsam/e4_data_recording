@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 FileWriter.getInstance().appendTime(edaTime+","+ibiTime+","+"end");
                 System.out.println("END: EDA Timestamp=" + edaTime + " IBI Timestamp=" + ibiTime);
             }
+
         });
 
 

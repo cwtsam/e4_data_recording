@@ -123,10 +123,9 @@ public class FileWriter {
 	public synchronized void appendTime(String record) {
 
 		timestamp.add(record);
-		if (timestamp.size() > 10) {
 			String path = basePath + "/timestamp.csv";
 			writeFile(timestamp, path);
 			timestamp = new ArrayList<>();
-		}
+
 	}
 }
