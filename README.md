@@ -18,6 +18,10 @@ Calculated for every IBI sample
 SDNN and RMSSD use the same equations as found here (https://www.kubios.com/about-hrv/).
 SDNN and RMSSD values are calculated when a new IBI sample is detected, calculations use the past 60 samples of IBI.
 
+2) Recording Data and Writing to CSV Files
+
+
+
 ## Information on the Original Sample Project
 
 The originial sample project gives you the boilerplate code you need to connect to an Empatica E4 device and start streaming data.
