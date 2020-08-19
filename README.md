@@ -1,8 +1,26 @@
-# EmpaLink Sample Project
+# Modified EmpaLink Project
 
 ## Introduction
 
-This sample project gives you the boilerplate code you need to connect to an Empatica E4 device and start streaming data.
+This project was modified from the sample EmpaLink Project given by Empatica (https://github.com/empatica/empalink-sample-project-android).
+
+Added three main functions:
+
+1) Real-Time Time-Domain Heart-Rate Variability (HRV) Calculations
+
+Under MainActivity.java, inter-beat-intervals (IBI) stream is accessible throught the device.
+
+Time-Domain HRV components calculate from IBI: Heart Rate (HR), Standard Deviation of NN intervals or IBI (SDNN) and Root-mean-square of Successive Differences in IBI (RMSSD).
+
+HR = 60/IBI
+Calculated for every IBI sample
+
+SDNN and RMSSD use the same equations as found here (https://www.kubios.com/about-hrv/).
+SDNN and RMSSD values are calculated when a new IBI sample is detected, calculations use the past 60 samples of IBI.
+
+## Information on the Original Sample Project
+
+The originial sample project gives you the boilerplate code you need to connect to an Empatica E4 device and start streaming data.
 
 The sample application implemented in the project has very simple functionalities:
 
