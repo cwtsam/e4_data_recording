@@ -8,7 +8,7 @@ Added three main functions:
 
 1) Real-Time Time-Domain Heart-Rate Variability (HRV) Calculations
 
-Under MainActivity.java, inter-beat-intervals (IBI) stream is accessible throught the device.
+Under MainActivity.java, inter-beat-intervals (IBI) stream is accessible through the device.
 
 Time-Domain HRV components calculate from IBI: Heart Rate (HR), Standard Deviation of NN intervals or IBI (SDNN) and Root-mean-square of Successive Differences in IBI (RMSSD).
 
