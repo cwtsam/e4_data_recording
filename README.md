@@ -12,11 +12,9 @@ Under MainActivity.java, inter-beat-intervals (IBI) stream is accessible through
 
 Time-Domain HRV components calculate from IBI: Heart Rate (HR), Standard Deviation of NN intervals or IBI (SDNN) and Root-mean-square of Successive Differences in IBI (RMSSD).
 
-HR = 60/IBI
-Calculated for every IBI sample
+- HR = 60/IBI ---- Calculated for every IBI sample
 
-SDNN and RMSSD use the same equations as found here (https://www.kubios.com/about-hrv/).
-SDNN and RMSSD values are calculated when a new IBI sample is detected, calculations use the past 60 samples of IBI.
+- SDNN and RMSSD use the same equations as found here (https://www.kubios.com/about-hrv/). ---- Values are calculated when a new IBI sample is detected, calculations use the past 60 samples of IBI.
 
 2) Recording Data and Writing to CSV Files
 
