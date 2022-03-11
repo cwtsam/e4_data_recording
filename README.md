@@ -22,7 +22,7 @@ Time-Domain HRV components calculate from IBI: Heart Rate (HR), Standard Deviati
 
 ### 2) Recording Data and Writing to CSV Files
 
-The data is recording to CSV files on the phone.
+The data is recorded to CSV files on the phone.
 
 - FileWriter.java method helps to write the data to separate files (for current code: eda.csv and ibi.csv). These files should be saved to the Documents folder of the Android device.
 
