@@ -6,7 +6,7 @@ This project was modified from the sample EmpaLink Project given by Empatica (ht
 
 Added three main functions:
 
-1) Real-Time Time-Domain Heart-Rate Variability (HRV) Calculations
+### 1) Real-Time Time-Domain Heart-Rate Variability (HRV) Calculations
 
 Under MainActivity.java, inter-beat-intervals (IBI) stream is accessible through the device.
 
@@ -16,7 +16,7 @@ Time-Domain HRV components calculate from IBI: Heart Rate (HR), Standard Deviati
 
 - SDNN and RMSSD use the same equations as found here (https://www.kubios.com/about-hrv/). ---- Values are calculated when a new IBI sample is detected, calculations use the past 60 samples of IBI.
 
-2) Recording Data and Writing to CSV Files
+### 2) Recording Data and Writing to CSV Files
 
 - FileWriter.java method helps to write the data to separate files (for current code: eda.csv and ibi.csv). These files should be saved to the Documents folder of the Android device.
 
@@ -24,7 +24,7 @@ Time-Domain HRV components calculate from IBI: Heart Rate (HR), Standard Deviati
 
 - In MainActivity.Data, a FileWriter object is created, getInstance and append functions are called to record data for each stream. 
 
-3) Begin and End Timestamp Logs to CSV File
+### 3) Begin and End Timestamp Logs to CSV File
 
 - Buttons (Begin and End) are created to help mark the timestamps for the beginning and end of the recording sessions. 
 
