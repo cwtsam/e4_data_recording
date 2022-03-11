@@ -8,6 +8,8 @@ Three main functions were added:
 
 ### 1) Real-Time Time-Domain Heart-Rate Variability (HRV) Calculations
 
+The app calculates Heart-Rate Variability measures and records it on the phone.
+
 Under MainActivity.java, inter-beat-intervals (IBI) stream is accessible through the device.
 
 Time-Domain HRV components calculate from IBI: Heart Rate (HR), Standard Deviation of NN intervals or IBI (SDNN) and Root-mean-square of Successive Differences in IBI (RMSSD).
@@ -18,13 +20,17 @@ Time-Domain HRV components calculate from IBI: Heart Rate (HR), Standard Deviati
 
 ### 2) Recording Data and Writing to CSV Files
 
+The data is recording to CSV files on the phone.
+
 - FileWriter.java method helps to write the data to separate files (for current code: eda.csv and ibi.csv). These files should be saved to the Documents folder of the Android device.
 
 - If you would like to modify which streams are recorded (temperature, accelerometer etc.), you would have to duplicate appendIBI or appendEDA functions in FileWriter.java, and change it to the stream that you want to add.
 
 - In MainActivity.Data, a FileWriter object is created, getInstance and append functions are called to record data for each stream. 
 
-### 3) Begin and End Timestamp Logs to CSV File
+### 3) Begin and End Timestamp Event Logs to CSV File
+
+The app allows users to indicate event timestamps remotely on the phone. In this way, you would not need to indicate event timestamps by pressing the button on the E4 wristband.
 
 - Buttons (Begin and End) are created to help mark the timestamps for the beginning and end of the recording sessions. 
 
