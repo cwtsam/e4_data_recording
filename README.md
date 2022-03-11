@@ -2,6 +2,8 @@
 
 ## Introduction
 
+The project is an Android app at enables streaming of data from the Empatica E4 Wristband to your Android mobile device and data recording to CSV files on your device.
+
 This project was modified from the sample EmpaLink Project given by Empatica (https://github.com/empatica/empalink-sample-project-android).
 
 Three main functions were added:
