@@ -4,7 +4,7 @@
 
 This project was modified from the sample EmpaLink Project given by Empatica (https://github.com/empatica/empalink-sample-project-android).
 
-Added three main functions:
+Three main functions were added:
 
 ### 1) Real-Time Time-Domain Heart-Rate Variability (HRV) Calculations
 
