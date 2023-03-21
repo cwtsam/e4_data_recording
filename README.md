@@ -1,4 +1,4 @@
-# Modified EmpaLink Project
+# E4 Wristband EmpaLink Recording for Android
 
 ## Introduction
 
